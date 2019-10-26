@@ -3,13 +3,13 @@ module Api
   module V1
     class RankingsController < ApplicationController
       def mark
-        return render json: { error: 'answerがパラメータとして必須です' }, status: 400 unless params[:answer]
+        return render json: { status: 400, error: 'answerがパラメータとして必須です' }, status: 400 unless params[:answer]
 
         quiz = Quiz.find(params[:quize_id])
         ranking = quiz.rankings.find_by(name: params[:answer], order: params[:order])
 
         ranking.grade.create if ranking
-        render json: { is_success: ranking.present? }, status: 200
+        render json: { status: 200, is_success: ranking.present? }, status: 200
       end
 
       def filter_half
@@ -27,7 +27,7 @@ module Api
         end
         positive_answer_names = rest_candidate_answer_names.push(answer_name)
 
-        render json: { positive_answer_names: positive_answer_names, negative_answer_names: negative_answer_names }
+        render json: { status: 200, positive_answer_names: positive_answer_names, negative_answer_names: negative_answer_names }, status: 200
       end
     end
   end

@@ -10,11 +10,11 @@ module Api
 
         # NOTE: idをつける必要があるのはNUXTの関係
         arrange_keywords = keywords.map.with_index(1) { |k, idx| { id: idx, keyword: k } }
-        render json: { keywords: arrange_keywords }, status: 200
+        render json: { status: 200, keywords: arrange_keywords }, status: 200
       end
 
       def create
-        return render json: { error: 'キーワードがパラメータとして必須です' }, status: 400 unless params[:keyword]
+        return render json: { status: 400, error: 'キーワードがパラメータとして必須です' }, status: 400 unless params[:keyword]
 
         base_url = 'https://app.rakuten.co.jp/services/api/Product/Search/20170426'
         param = {
@@ -26,14 +26,14 @@ module Api
         request_url = base_url + '?' + param
 
         response = JSON.parse(HTTPClient.get(request_url).body)
-        return render json: { error: '現在繋がりにくい状態です。もう一度お試しください' }, status: 429 if response['error']
+        return render json: { status: 429, error: '現在繋がりにくい状態です。もう一度お試しください' }, status: 429 if response['error']
 
         ranking_data = generate_ranking_data(response)
         quiz = create_quiz_records(ranking_data)
         candidate_answers = ranking_data.map { |data| data[:name] }
 
         # 1~9位の情報と回答の候補を返す
-        render json: { quiz_id: quiz.id, ranking: ranking_data[0..8], candidate_answers: candidate_answers }, status: 200
+        render json: { status: 200, quiz_id: quiz.id, ranking: ranking_data[0..8], candidate_answers: candidate_answers }, status: 200
       end
 
       def show
@@ -41,7 +41,7 @@ module Api
         ranking = quiz.gen_ranking_data
         candidate_answers = quiz.gen_candidate_answers
 
-        render json: { ranking: ranking, candidate_answers: candidate_answers }, status: 200
+        render json: { status: 200, ranking_theme: quiz.keyword, ranking: ranking, candidate_answers: candidate_answers }, status: 200
       end
 
 
