@@ -5,7 +5,7 @@ module Api
       def mark
         return render json: { error: 'answerがパラメータとして必須です' }, status: 400 unless params[:answer]
 
-        quiz = Quiz.find(params[:quiz_id])
+        quiz = Quiz.find(params[:quize_id])
         ranking = quiz.rankings.find_by(name: params[:answer], order: params[:order])
 
         # NOTE: 正解情報を情報を持っておくかどうか分からないのでこのような条件分岐に
