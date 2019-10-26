@@ -4,7 +4,7 @@
       <div class="form-group">
         <h2 class="text-center quiz-create">クイズを作成しよう！</h2>
           <div class="input-group margin-top3">
-            <input type="text" v-model="inputCategory" class="form-control quiz-input" aria-describedby="emailHelp" placeholder="カテゴリーを選択しよう！">
+            <input type="text" v-model="inputCategory" class="form-control quiz-input" aria-describedby="emailHelp" placeholder="自由に入力しよう！">
             <button type="button" @click="chooseRandom(response.keywords)" class="btn btn-outline-info">ランダムで選ぶ</button>
           </div>
       </div>
@@ -13,6 +13,7 @@
       </div>
 
       <div class="choice-group text-center">
+        <p class="font-weight-bold">運営おすすめのキーワード</p>
         <button type="button" @click="chooseCategory(keyword.keyword)" class="btn btn-warning choice-button" v-for="keyword in response.keywords" :key="keyword.id">{{ keyword.keyword }}</button>
       </div>
     </form>
