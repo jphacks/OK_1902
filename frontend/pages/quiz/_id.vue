@@ -1,6 +1,6 @@
 <template>
   <div class="conatainer">
-    <h3 class="text-center margin-top1">協力して全問正解を目指そう🤔</h3>
+    <h3 class="text-center margin-top1">今日の{{ response.ranking_theme }}ベスト{{ response.candidate_answers.length }}🔥</h3>
 
     <div class="row margin-top2">
       <div id="1" class="col-4 text-center pannel" @dragover="answerQuiz($event)"><b>1</b></div>
@@ -16,11 +16,6 @@
       <div id="7" class="col-4 text-center pannel" @dragover="answerQuiz($event)"><b>7</b></div>
       <div id="8" class="col-4 text-center pannel" @dragover="answerQuiz($event)"><b>8</b></div>
       <div id="9" class="col-4 text-center pannel" @dragover="answerQuiz($event)"><b>9</b></div>
-    </div>
-
-    <div class="hint-area text-center">
-      <h5>難しい問題はヒントを押すと選択肢を2つに絞ることが出来ます</h5>
-      <button type="button" class="btn btn-info">ヒント</button>
     </div>
 
     <div class="choice-group text-center">
@@ -117,10 +112,7 @@ export default {
 .choice-button {
   margin-left: 1em;
   margin-top: 2em;
-}
-
-.hint-area {
-  margin-top: 2em;
+  font-size: 1.3rem;
 }
 </style>
 
