@@ -20,14 +20,9 @@ module Api
         answer_name = ranking.name
         # NOTE: 他のランキングで正解済みの情報は、不正解の回答候補にする
         corrected_answers = quiz.rankings.select(&:grade)
-        rest_candidate_answer_names = candidate_answers.map(&:name) - corrected_answers.map(&:name).push(answer_name).uniq
-        negative_answer_names = []
-        (rest_candidate_answer_names.size / 2).times do |_|
-          negative_answer_names << rest_candidate_answer_names.delete(rest_candidate_answer_names.sample)
-        end
-        positive_answer_names = rest_candidate_answer_names.push(answer_name)
+        negative_answer_names = candidate_answers.map(&:name) - corrected_answers.map(&:name).push(answer_name).uniq
 
-        render json: { status: 200, positive_answer_names: positive_answer_names, negative_answer_names: negative_answer_names }, status: 200
+        render json: { status: 200, positive_answer_name: answer_name, negative_answer_name: negative_answer_names.sample }, status: 200
       end
     end
   end
