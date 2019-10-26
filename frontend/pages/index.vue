@@ -1,23 +1,19 @@
 <template>
   <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        frontend
-      </h1>
-      <h2 class="subtitle">
-        My super Nuxt.js project
-      </h2>
+      <img src="/main_logo.png" class="main-logo"/>
+      <p>商品のリアルタイムの人気が分かるより楽しいクイズアプリです。</p>
+      <p>アイスブレイクなどで使えば一緒にクイズを考えることで自然と仲が深まるきっかけになるかもしれません。</p>
       <div class="links">
         <a
-          href="https://nuxtjs.org/"
+          href="https://pannel-break.herokuapp.com/quiz/new"
           target="_blank"
           class="button--green"
         >
-          Documentation
+          Start Quiz
         </a>
         <a
-          href="https://github.com/nuxt/nuxt.js"
+          href="https://github.com/jphacks/ON_1902"
           target="_blank"
           class="button--grey"
         >
@@ -28,17 +24,11 @@
   </div>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
-
-export default {
-  components: {
-    Logo
-  }
-}
-</script>
 
 <style>
+.main-logo {
+  width: 80%;
+}
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -46,24 +36,6 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
 }
 
 .links {
