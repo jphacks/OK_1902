@@ -29,11 +29,11 @@ module Api
         render json: { error: '現在繋がりにくい状態です。もう一度お試しください' } if response['error']
 
         ranking_data = generate_ranking_data(response)
-        create_quiz_records(ranking_data)
+        quiz = create_quiz_records(ranking_data)
         candidate_answers = ranking_data.map { |data| data[:name] }
 
         # 1~9位の情報と回答の候補を返す
-        render json: { ranking: ranking_data[0..8], candidate_answers: candidate_answers }
+        render json: { quiz_id: quiz.id, ranking: ranking_data[0..8], candidate_answers: candidate_answers }
       end
 
       def show
@@ -60,6 +60,8 @@ module Api
             # NOTE: 回答の候補を保存
             quiz.candidate_answers.create(name: info[:name], order: info[:rank])
           end
+
+          quiz
         end
       end
     end
