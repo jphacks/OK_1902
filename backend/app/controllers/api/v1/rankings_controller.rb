@@ -8,12 +8,8 @@ module Api
         quiz = Quiz.find(params[:quize_id])
         ranking = quiz.rankings.find_by(name: params[:answer], order: params[:order])
 
-        # NOTE: 正解情報を情報を持っておくかどうか分からないのでこのような条件分岐に
-        if ranking
-          render json: { is_success: true }, status: 200
-        else
-          render json: { is_success: false }, status: 200
-        end
+        ranking.grades.create() if ranking
+        render json: { is_success: ranking.present? }, status: 200
       end
     end
   end
