@@ -37,7 +37,11 @@ module Api
       end
 
       def show
-        render json: { status: 'SUCCESS' }, status: 200
+        quiz = Quiz.find(params[:id])
+        ranking = quiz.gen_ranking_data
+        candidate_answers = quiz.gen_candidate_answers
+
+        render json: { ranking: ranking, candidate_answers: candidate_answers }, status: 200
       end
 
 
