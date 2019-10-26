@@ -62,7 +62,7 @@ module Api
             quiz.rankings.create(name: info[:name], order: info[:rank]) if [*1..9].include?(info[:rank])
 
             # NOTE: 回答の候補を保存
-            quiz.candidate_answers.create(name: info[:name], order: info[:rank])
+            quiz.candidate_answers.create(name: info[:name], order: info[:rank]) if [*1..9].include?(info[:rank])
           end
 
           quiz
