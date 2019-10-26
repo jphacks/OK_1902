@@ -1,3 +1,5 @@
+const environment = process.env.NODE_ENV || 'development';
+const envSet = require(`./config/env.${environment}.js`)
 
 export default {
   mode: 'universal',
