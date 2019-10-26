@@ -54,6 +54,7 @@ GEM
     ffi (1.11.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    httpclient (2.8.3)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
     listen (3.1.5)
@@ -139,6 +140,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
+  httpclient
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   pry
