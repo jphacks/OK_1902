@@ -6,7 +6,7 @@ module Api
       RAKUTEN_APP_SECRET = Rails.application.credentials.rakuten[:app_secret]
 
       def new
-        keywords = %w[お茶 漫画 ゲーム PC お土産 化粧品 財布 曲 弁当]
+        keywords = %w[お茶 漫画 ゲーム PC お土産 化粧品 財布 曲 弁当 飲み物 楽器 写真集 エナジードリンク カレー  ピクサーDVD ジブリDVD シングルCD 缶ビール 大河ドラマDVD]
 
         # NOTE: idをつける必要があるのはNUXTの関係
         arrange_keywords = keywords.map.with_index(1) { |k, idx| { id: idx, keyword: k } }

@@ -7,6 +7,6 @@ class Quiz < ApplicationRecord
   end
 
   def gen_candidate_answers
-    candidate_answers.pluck(:name).shuffle
+    candidate_answers.pluck(:id, :name).map { |arr| { id: arr[0], name: arr[1] } }.shuffle
   end
 end
