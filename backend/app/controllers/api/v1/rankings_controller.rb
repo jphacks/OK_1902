@@ -8,7 +8,7 @@ module Api
         quiz = Quiz.find(params[:quize_id])
         ranking = quiz.rankings.find_by(name: params[:answer], order: params[:order])
 
-        ranking.grade.create if ranking
+        Grade.find_or_create_by(ranking_id: ranking.id) if ranking
         render json: { status: 200, is_success: ranking.present? }, status: 200
       end
 
