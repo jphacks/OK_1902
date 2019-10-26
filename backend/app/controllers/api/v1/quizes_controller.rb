@@ -14,7 +14,7 @@ module Api
       end
 
       def create
-        render json: { error: 'キーワードがパラメータとして必須です' }, status: 400 unless params[:keyword]
+        return render json: { error: 'キーワードがパラメータとして必須です' }, status: 400 unless params[:keyword]
 
         base_url = 'https://app.rakuten.co.jp/services/api/Product/Search/20170426'
         param = {
@@ -26,7 +26,7 @@ module Api
         request_url = base_url + '?' + param
 
         response = JSON.parse(HTTPClient.get(request_url).body)
-        render json: { error: '現在繋がりにくい状態です。もう一度お試しください' }, status: 429 if response['error']
+        return render json: { error: '現在繋がりにくい状態です。もう一度お試しください' }, status: 429 if response['error']
 
         ranking_data = generate_ranking_data(response)
         quiz = create_quiz_records(ranking_data)

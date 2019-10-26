@@ -3,7 +3,7 @@ module Api
   module V1
     class RankingsController < ApplicationController
       def mark
-        render json: { error: 'answerがパラメータとして必須です' }, status: 400 unless params[:answer]
+        return render json: { error: 'answerがパラメータとして必須です' }, status: 400 unless params[:answer]
 
         quiz = Quiz.find(params[:quiz_id])
         ranking = quiz.rankings.find_by(name: params[:answer], order: params[:order])
