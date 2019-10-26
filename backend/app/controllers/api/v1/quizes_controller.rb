@@ -44,6 +44,13 @@ module Api
         render json: { status: 200, ranking_theme: quiz.keyword, ranking: ranking, candidate_answers: candidate_answers }, status: 200
       end
 
+      def ranking_list
+        quiz = Quiz.find(params[:quize_id])
+        ranking = quiz.gen_ranking_data
+
+        render json: { status: 200, ranking: ranking }
+      end
+
 
       private
 
