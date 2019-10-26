@@ -5,7 +5,7 @@
         <h2 class="text-center quiz-create">クイズを作成しよう！</h2>
           <div class="input-group margin-top3">
             <input type="text" v-model="inputCategory" class="form-control quiz-input" aria-describedby="emailHelp" placeholder="カテゴリーを選択しよう！">
-            <button type="button" @click="chooseRandom" class="btn btn-outline-info">ランダムで選ぶ</button>
+            <button type="button" @click="chooseRandom(response.keywords)" class="btn btn-outline-info">ランダムで選ぶ</button>
           </div>
       </div>
       <div class="text-center margin-top2">
@@ -13,7 +13,7 @@
       </div>
 
       <div class="choice-group text-center">
-        <button type="button" @click="chooseCategory(choice.name)" class="btn btn-warning choice-button" v-for="choice in choices" :key="choice.id">{{ choice.name }}</button>
+        <button type="button" @click="chooseCategory(keyword.keyword)" class="btn btn-warning choice-button" v-for="keyword in response.keywords" :key="keyword.id">{{ keyword.keyword }}</button>
       </div>
     </form>
   </div>
@@ -21,34 +21,24 @@
 
 <script>
 export default {
+  async asyncData({ app }) {
+    const response = await app.$axios.$get('https://pannel-break-backend.herokuapp.com/api/v1/quizes/new');
+    // const keywords = await app.$axios.$get(`${process.env.apiBaseUrl}/api/v1/quizes/new`);
+    return {
+      response
+    }
+  },
   data() {
     return {
-      inputCategory: '',
-      choices: [
-        { id: 1, name: 'hoge1'},
-        { id: 2, name: 'hoge2'},
-        { id: 3, name: 'hoge3'},
-        { id: 4, name: 'hoge4'},
-        { id: 5, name: 'hoge5'},
-        { id: 6, name: 'hoge6'},
-        { id: 7, name: 'hoge7'},
-        { id: 8, name: 'hoge8'},
-        { id: 9, name: 'hoge9'},
-        { id: 10, name: 'hoge10'},
-        { id: 11, name: 'hoge11'},
-        { id: 12, name: 'hoge12'},
-        { id: 13, name: 'hoge13'},
-        { id: 14, name: 'hoge14'},
-        { id: 15, name: 'hoge15'}
-      ]
+      inputCategory: ''
     }
   },
   methods: {
     chooseCategory(choiceName) {
       this.inputCategory = choiceName
     },
-    chooseRandom() {
-      this.inputCategory = this.choices[Math.floor(Math.random() * this.choices.length)].name
+    chooseRandom(keywords) {
+      this.inputCategory = keywords[Math.floor(Math.random() * keywords.length)].keyword
     }
   }
 }
