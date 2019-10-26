@@ -9,7 +9,7 @@
           </div>
       </div>
       <div class="text-center margin-top2">
-        <button type="submit" class="btn btn-primary">作成する！</button>
+        <button type="button" @click="createQuiz()" class="btn btn-primary">作成する！</button>
       </div>
 
       <div class="choice-group text-center">
@@ -39,6 +39,12 @@ export default {
     },
     chooseRandom(keywords) {
       this.inputCategory = keywords[Math.floor(Math.random() * keywords.length)].keyword
+    },
+    async createQuiz() {
+      const response = await this.$axios.$post('https://pannel-break-backend.herokuapp.com/api/v1/quizes', {
+        keyword: this.inputCategory
+      })
+      this.$router.push(`/quiz/${response.quiz_id}`)
     }
   }
 }
