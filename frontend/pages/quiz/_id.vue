@@ -1,7 +1,7 @@
 <template>
   <div class="conatainer">
     <h3 class="text-center margin-top1">今日の{{ response.ranking_theme }}ベスト{{ response.candidate_answers.length }}🔥</h3>
-    <modal :val=true v-if="isCorrect" @close="closeModal"></modal>
+    <modal :val=true :description=this.successDescription v-if="isCorrect" @close="closeModal"></modal>
     <modal :val=false v-if="isFalse" @close="closeModal"></modal>
     <finishModal v-if="isFinish" @close="closeFinishModal"></finishModal>
 
@@ -61,7 +61,8 @@ export default {
       'isCorrect': false,
       'isFalse': false,
       'isFinish': false,
-      'ranking': []
+      'ranking': [],
+      'successDescription': ''
     }
   },
   methods: {
@@ -86,6 +87,7 @@ export default {
         })
         console.log(response)
         if (response.is_success) {
+          this.successDescription = response.description;
           let answer = document.getElementById(this.draggingId);
           answer.parentNode.removeChild(answer);
           let answers = document.getElementsByClassName('choice-button');
@@ -95,6 +97,7 @@ export default {
             this.ranking = response.ranking
             console.log(this.ranking)
           } else {
+            console.log(this.successDescription);
             this.isCorrect = true;
           }
           let pannel = document.getElementById(this.onDraggingPannelId);
