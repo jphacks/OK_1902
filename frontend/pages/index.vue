@@ -24,6 +24,13 @@
   </div>
 </template>
 
+<script>
+export default {
+  middleware ({ redirect }) {
+    return redirect('https://peraichi.com/landing_pages/view/pannelbreak')
+  }
+}
+</script>
 
 <style>
 .main-logo {
