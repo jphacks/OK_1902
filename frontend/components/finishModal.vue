@@ -3,11 +3,8 @@
     <div class="modal-mask" @click="$emit('close')">
       <div class="modal-wrapper">
         <div class="modal-container text-center">
-          <img class="maru-image" v-if="val" src="~/assets/mark_maru.png">
-          <img class="batsu-image" v-else src="~/assets/mark_batsu.png">
-          <h4 class="maru-text" style="color:#5D99FF;" v-if="val"><b>正解！😊</b></h4>
-          <h4 class="batsu-text" style="color:red;" v-else><b>残念...😭別の順位で試してみよう</b></h4>
-          <p v-if="description">{{ description }}</p>
+          <img class="finish-image" src="~/assets/family_happy_banzai.png">
+          <h4><b>おめでとう！全問正解です！🎊</b></h4>
         </div>
       </div>
     </div>
@@ -16,11 +13,7 @@
 
 <script>
   export default {
-    name: 'modal',
-    props: {
-      val: Boolean,
-      description: String
-    }
+    name: 'modal'
   }
 </script>
 
@@ -51,15 +44,7 @@
     font-family: Helvetica, Arial, sans-serif;
   }
 
-  .maru-image {
+  .finish-image {
     width: 40%;
-  }
-
-  .batsu-image {
-    width: 40%;
-  }
-
-  .maru-text {
-    /* font-size: 120%; */
   }
 </style>
