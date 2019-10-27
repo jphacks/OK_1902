@@ -1,7 +1,7 @@
 <template>
   <div class="conatainer">
     <h3 class="text-center margin-top1">今日の{{ response.ranking_theme }}ベスト{{ response.candidate_answers.length }}🔥</h3>
-    <modal :val=true :description=this.successDescription v-if="isCorrect" @close="closeModal"></modal>
+    <modal :val=true :description=this.successDescription :productUrl=this.productUrl v-if="isCorrect" @close="closeModal"></modal>
     <modal :val=false v-if="isFalse" @close="closeModal"></modal>
     <finishModal v-if="isFinish" @close="closeFinishModal"></finishModal>
 
@@ -62,7 +62,8 @@ export default {
       'isFalse': false,
       'isFinish': false,
       'ranking': [],
-      'successDescription': ''
+      'successDescription': '',
+      'productUrl': ''
     }
   },
   methods: {
@@ -88,6 +89,7 @@ export default {
         console.log(response)
         if (response.is_success) {
           this.successDescription = response.description;
+          this.productUrl = response.product_url;
           let answer = document.getElementById(this.draggingId);
           answer.parentNode.removeChild(answer);
           let answers = document.getElementsByClassName('choice-button');
