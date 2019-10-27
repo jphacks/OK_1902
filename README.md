@@ -2,6 +2,12 @@
 
 [![Product Name](image.png)](https://www.youtube.com/watch?v=G5rULR53uMk)
 
+## サービスURL
+どちらでもアクセスできます。
+
+https://peraichi.com/landing_pages/view/pannelbreak
+( https://pannel-break.herokuapp.com/ )
+
 ## 製品概要
 ### Communication × Quiz × Tech
 
