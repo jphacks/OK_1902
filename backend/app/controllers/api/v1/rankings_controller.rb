@@ -8,8 +8,12 @@ module Api
         quiz = Quiz.find(params[:quize_id])
         ranking = quiz.rankings.find_by(name: params[:answer], order: params[:order])
 
-        Grade.find_or_create_by(ranking_id: ranking.id) if ranking
-        render json: { status: 200, is_success: ranking.present? }, status: 200
+        if ranking
+          Grade.find_or_create_by(ranking_id: ranking.id)
+          render json: { status: 200, is_success: true, description: ranking.description, product_url: ranking.product_url }, status: 200
+        else
+          render json: { status: 200, is_success: false, description: nil, url: nil }, status: 200
+        end
       end
 
       def filter_half
