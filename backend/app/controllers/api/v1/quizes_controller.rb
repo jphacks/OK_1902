@@ -58,18 +58,26 @@ module Api
       # 水って検索したときに「(水)で流せるおしりふき」というのが出てくる。
       # 水で検索した一番目のgenleldを取得そのgenleldでAND検索をすればより良いものが出てくるのでは？？？
       def generate_ranking_data(response)
-        response['Products'].map.with_index(1) { |p, idx| { name: p['Product']['productName'], rank: idx } }
+        response['Products'].map.with_index(1) do |p, idx|
+            {
+              name: p['Product']['productName'],
+              rank: idx,
+              description: "商品名: #{p['Product']['productName']} 発売日: #{p['Product']['releaseDate']}\n レビュー: #{p['Product']['reviewAverage']} 最安値: #{p['Product']['salesMinPrice']}円",
+              url: p['Product']['productUrlPC']
+            }
+        end
       end
 
       def create_quiz_records(ranking_data)
         ActiveRecord::Base.transaction do
           quiz = Quiz.create(keyword: params[:keyword])
-          ranking_data.each do |info|
+          ranking_data[0..8].each do |info|
             # NOTE: 1~9位のランキングを保存
-            quiz.rankings.create(name: info[:name], order: info[:rank]) if [*1..9].include?(info[:rank])
+            quiz.rankings.create(name: info[:name], order: info[:rank], description: info[:description], product_url: info[:url])
 
             # NOTE: 回答の候補を保存
-            quiz.candidate_answers.create(name: info[:name], order: info[:rank]) if [*1..9].include?(info[:rank])
+            # FIXME: 回答候補を9つ以上増やす際には必要
+            quiz.candidate_answers.create(name: info[:name], order: info[:rank])
           end
 
           quiz
