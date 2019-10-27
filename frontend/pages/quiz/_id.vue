@@ -1,7 +1,8 @@
 <template>
   <div class="conatainer">
     <h3 class="text-center margin-top1">今日の{{ response.ranking_theme }}ベスト{{ response.candidate_answers.length }}🔥</h3>
-
+    <modal :val=true v-if="isCorrect" @close="closeModal"></modal>
+    <modal :val=false v-if="isFalse" @close="closeModal"></modal>
     <div class="row margin-top2">
       <div id="1" class="col-4 text-center pannel" @dragover="answerQuiz($event)"><b>1</b></div>
       <div id="2" class="col-4 text-center pannel" @dragover="answerQuiz($event)"><b>2</b></div>
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import modal from '~/components/modal.vue'
 export default {
   async asyncData({ route, app }) {
     const response = await app.$axios.$get(`https://pannel-break-backend.herokuapp.com/api/v1/quizes/${route.params.id}`);
@@ -32,6 +34,9 @@ export default {
     return {
       response
     }
+  },
+  components: {
+    modal
   },
   data() {
     return {
@@ -64,12 +69,13 @@ export default {
         })
         console.log(response)
         if (response.is_success) {
+          this.isCorrect = true;
           let pannel = document.getElementById(this.onDraggingPannelId);
           pannel.style.backgroundColor = '#FF1A6F';
           let answer = document.getElementById(this.draggingId);
           answer.parentNode.removeChild(answer);
         } else {
-          this.isFalse = true
+          this.isFalse = true;
         }
       }
 
@@ -80,6 +86,10 @@ export default {
       e.target.style.opacity = 1
       this.draggingName = ''
       this.onDraggingPannelId = ''
+    },
+    closeModal() {
+      this.isCorrect = false;
+      this.isFalse = false;
     }
   }
 }
