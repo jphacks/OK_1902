@@ -8,6 +8,7 @@
           <h4 class="maru-text" style="color:#5D99FF;" v-if="val"><b>正解！😊</b></h4>
           <h4 class="batsu-text" style="color:red;" v-else><b>残念...😭別の順位で試してみよう</b></h4>
           <p v-if="description">{{ description }}</p>
+          <a v-if="productUrl" :href="productUrl" target="_blank">商品はこちらから</a>
         </div>
       </div>
     </div>
@@ -19,7 +20,8 @@
     name: 'modal',
     props: {
       val: Boolean,
-      description: String
+      description: String,
+      productUrl: String
     }
   }
 </script>
