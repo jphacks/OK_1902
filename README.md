@@ -1,6 +1,6 @@
 # PannelBreak
 
-[![Product Name](https://raw.githubusercontent.com/jphacks/ON_1902/master/frontend/static/main_logo.png)](https://www.youtube.com/watch?v=7iPxiSXJMhE&app=desktop)
+[![Product Name](https://raw.githubusercontent.com/jphacks/ON_1902/master/frontend/static/pannel_break.png)](https://www.youtube.com/watch?v=7iPxiSXJMhE&app=desktop)
 
 ## サービスURL
 どちらでもアクセスできます。
